@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="css/1020S.css" rel="stylesheet" />
+<script src="js/1020S.js"></script>
+
+
+<body>
+
+	<p>確認と申請</p>
+	<div id="messageAria"></div>
+
+	<div>
+		<a>●勤怠</a>
+		<a>●交通費</a>
+		<input type="button" value="業務選択"></input>
+		<input type="button" value="CSV出力"></input>
+		<input type="button" value="勤務表作成"></input>
+	</div>
+
+
+	<input type="radio" id="radio1" name="dispRadio" value="on" onClick="updateDispTable(this)" />表示
+	<input type="radio" id="radio2" name="dispRadio" value="off" onClick="updateDispTable(this)" />非表示
+
+
+	<table id="dispTable">
+	<tbody id="dispTableArea"></tbody>
+	</table>
+
+	<input type="button" value="選択箇所を削除" onclick="deleteLine()"></input>
+
+	<table id="baseTable">
+	<tbody id="graphAria"></tbody>
+	</table>
+
+	<input type="button" value="選択箇所を削除" onclick="deleteLine()"></input>
+
+
+
+	<ul id="subMenu" style="display:none;" >
+		<li class="subMenuList"><a id="1" onclick="moveSubMenuPage(this)">時間外申請</a></li>
+		<li class="subMenuList"><a id="2" onclick="moveSubMenuPage(this)">休暇申請</a></li>
+		<li class="subMenuList"><a id="3" onclick="moveSubMenuPage(this)">勤務実績</a></li>
+		<li class="subMenuList"><a id="4" onclick="moveSubMenuPage(this)">実績(初回)</a></li>
+	</ul>
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript">
+
+		//alert(globalValueList);
+
+		//暫定(後に削除予定)
+		var tableList;
+		getAttendanceList()
+
+
+		messageInit();
+		currentPage = "1020S";
+		document.getElementById("contents").hidden = false;
+
+
+		var totalList= [];
+
+		var count = createTable(tableList);
+		//createTotalGraph(totalList);
+
+		dispCheck();
+
+		//createDispTable();
+
+
+
+		function updateDispTable(obj){
+			if(obj.id=="radio1"){
+				createDispTable();
+				document.getElementById("dispTableArea").style.display = "block";
+			}else if(obj.id=="radio2"){
+				document.getElementById("dispTableArea").style.display = "none";
+			}
+
+		}
+
+
+		function dispCheck(){
+			gobalAuthority = "10";
+			//gobalAuthority = "20";
+
+			if(gobalAuthority.substr(0,1)=="1"){
+				document.getElementById("radio2").click();
+			}else if(gobalAuthority.substr(0,1)=="2"){
+				document.getElementById("radio1").click();
+			}
+		}
+
+
+
+		function deleteLine(){
+			deleteItems(count,tableList);
+		}
+
+		function popUpSubMenu(obj){
+			var subMenu = document.getElementById("subMenu");
+			var element = document.getElementById(obj.id) ;
+			var rect = element.getBoundingClientRect() ;
+
+			// 座標を計算する
+			var positionX = rect.left + window.pageXOffset ;	// 要素のX座標
+			var positionY = rect.top + window.pageYOffset ;	// 要素のY座標
+
+			subMenu.style.top = positionY + "px";
+			subMenu.style.left = positionX + "px";
+			subMenu.style.display = "block";
+		}
+
+		$(function(){
+		    $('#subMenu')
+		    .mouseover(function(){
+		    	$(this).css('display', 'block');
+		    })
+		    .mouseout(function(){
+		        $(this).css('display', 'none');
+		    })
+		});
+
+		function moveSubMenuPage(obj) {
+			var item = document.getElementById(obj.id).id;
+			globalValueList.push(tableList);
+			globalValueList.push(item);
+			pageChange("1021S");
+		}
+
+
+
+	</script>
+
+</body>
+</html>

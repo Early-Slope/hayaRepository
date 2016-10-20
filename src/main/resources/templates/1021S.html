@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<link href="css/1021S.css" rel="stylesheet" />
+<script src="js/1021S.js"></script>
+</head>
+
+<body>
+
+
+
+	<div id="tabmenu">
+	    <div id="tab">
+	        <a id="tabList1" href="#tab1" onclick="tabPageChange(this)">時間外申請</a>
+	        <a id="tabList2" href="#tab2" onclick="tabPageChange(this)">休暇申請</a>
+	        <a id="tabList3" href="#tab3" onclick="tabPageChange(this)">勤務実績</a>
+	        <a id="tabList4" href="#tab4" onclick="tabPageChange(this)">実績(初回)</a>
+	    </div>
+	    <div id="tab_contents">
+	        <ul>
+	            <li id="tab1">
+	            	<div id ="tab1Area"></div>
+	            </li>
+	            <li id="tab2">
+	            	<div id ="tab2Area"></div>
+	            </li>
+	            <li id="tab3">
+	            	<div id ="tab3Area"></div>
+	            </li>
+	            <li id="tab4">
+	            	<div id ="tab4Area"></div>
+	            </li>
+	        </ul>
+	    </div>
+	</div>
+
+
+
+
+	<a onclick="moveMainPage()">戻る</a>
+
+
+
+
+	<script type="text/javascript">
+	messageInit();
+	document.getElementById("contents").hidden = true;
+	var tabId = "tabList" + globalValueList[1];
+
+	window.setTimeout(function(){document.getElementById(tabId).click();}, 1);
+	globalValueList = [];
+
+
+	function tabPageChange(obj){
+		switch(obj.id){
+			case "tabList1":
+				tabPageLoad("tab1Area","1030S");
+				break;
+			case "tabList2":
+				tabPageLoad("tab2Area","1040S");
+				break;
+			case "tabList3":
+				tabPageLoad("tab3Area","1050S");
+				break;
+			case "tabList4":
+				tabPageLoad("tab4Area","1060S");
+				break;
+		}
+	}
+
+
+
+	function moveMainPage(){
+		pageChange("1020S");
+	}
+
+
+    function tabPageLoad(areaId,pageId){
+    	$('#'+ areaId).load('/' + pageId, null, function() {});
+    }
+
+
+
+
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+
+
+table#approvalBaseTable thead tr td{
+
+	border : 3px;
+	 /*overflow: scroll;   スクロール表示 */
+	height: 100px;
+}

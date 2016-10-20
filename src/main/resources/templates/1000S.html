@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<body>
+	<div id="messageAria"></div>
+
+	<div id="infomation" >
+		<input type="button" id="infomationButton" value="もっと見る" onclick="infomationMove()"></input>
+
+		<div id="infomationAria"></div>
+
+
+	</div>
+
+
+	<h5 class="switch">! ユーザー名・パスワードを入力して下さい。</h5>
+	<div class="toggle_faq">
+	        ユーザー名：<input type="text" id="userName"   maxlength="10" style="ime-mode: disabled;" /><br/>
+			パスワード：<input type="password" id="password"  maxlength="8" style="ime-mode: disabled;" />
+	</div>
+
+	<input type="button" class="btn" value="タイムカード"  id="b1" onclick="submitForm(this)"></input>
+	<input type="button" value="ログイン画面へ" id="b2" onclick="submitForm(this)"></input>
+
+
+
+
+
+
+
+
+
+
+
+	<!-- modal -->
+
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<!--  button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button -->
+					<h4 class="modal-title">処理結果</h4>
+				</div>
+				<div class="modal-body">
+					<div id="modalMessageAria"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+					<button type="button" class="btn btn-primary" id="confirmation" onclick="modalPageChange()">確認</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ここまで -->
+
+
+
+
+	<script type="text/javascript">
+
+		messageInit();
+		currentPage = "1000S";
+		document.getElementById("contents").hidden = true;
+		updateTime();
+		$(".toggle_faq").hide();
+
+		var messageStr;
+		var valid;
+
+		 $(document).ready(function(){
+			//h5にclass="active"を加えてからクリックイベント
+			$("h5.switch").addClass("active").click(function(){
+				//class付加やスライドをtoggleさせる
+				$(this).toggleClass("active").next().slideToggle("normal");
+				return false;
+			});
+		});
+
+		function accordion(){
+			if(document.getElementById("userName").value.length=="0"){
+				$(".toggle_faq").slideToggle().show();
+			}else{
+				$(".toggle_faq").slideToggle().hide();
+			}
+		}
+
+
+		function submitForm(obj) {
+			var blankChk = blankCheck(["userName","password"]);
+			if(blankChk==true){
+				getMessage();
+				var result  = createMessage(message)[0];
+				var resultMessage = createMessage(message)[1];
+
+				if(result == "true"){
+					if(obj.id=="b1"){
+						pageChange("1010S");
+					}else if(obj.id=="b2"){
+						modalWindow(result,resultMessage);
+					}
+				}else if(result=="false"){
+					modalWindow(result,resultMessage);
+				}
+			}else{
+				document.getElementById("messageAria").innerHTML = E000000;
+			}
+		}
+
+
+
+		function infomationMove(){
+			pageChange('1001S');
+		}
+
+
+
+		function modalPageChange(){
+			jQuery('.modal').modal('hide');
+			beforePage = "1000S";
+			pageChange("1020S");
+		}
+
+		//エラーコードだけでなく、社員の基本データも取得する。
+		function getMessage() {
+			var jsonStr = [];
+			var message = [];
+			var valueList = [];
+
+			var userName = document.getElementById("userName").value;
+			var password = document.getElementById("password").value;
+			valueList.push("1000S");
+			valueList.push(userName);
+			valueList.push(password);
+
+			var jsonObj = {"strList": valueList}
+
+			sendJson("message",JSON.stringify(jsonObj));
+		}
+
+	    function modalWindow(result,resultMessage){
+	        jQuery('.modal').modal('show');
+	        document.getElementById("modalMessageAria").innerHTML = resultMessage;
+	        document.getElementById("confirmation").disabled = "";
+	        document.getElementById("confirmation").style.background='#0000DD';
+
+	        if(result=="false"){
+	        	document.getElementById("confirmation").disabled = "true";
+	        	document.getElementById("confirmation").style.background='#DDDDDD';
+	        }
+	    };
+
+
+	    infomationLoad();
+
+	    function infomationLoad(){
+	    	$('#infomationAria').load('/1002S', null, function() {});
+	    }
+
+
+
+	    $(function(){
+	    	setTimeout(function(){
+	    		accordion();
+	    	},300);
+	    });
+
+
+
+	</script>
+
+</body>
+</html>

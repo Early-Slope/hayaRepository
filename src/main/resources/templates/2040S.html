@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="css/2040S.css" rel="stylesheet" />
+<script src="js/2040S.js"></script>
+
+
+<body>
+	<div id="search">
+
+		<form name="searchForm">
+			<div id="a">承認状態</div>
+			<select id="approvalStatus"></select><br/>
+
+			<div id="d">組織</div>
+			<select id="department" onchange="changeWorkList(this)"></select><br/>
+
+			<div id="w">業務</div>
+			<div id="work"></div><br/>
+
+			<div id="n">氏名</div>
+			<INPUT type="text" id="name"></INPUT><br/>
+
+			<div id="m">申請対象</div>
+			<select id="startMonth"></select>
+			～
+			<select id="endMonth"></select>
+		</form>
+
+		<div id="searchSubmit">
+			<input type="button" value="この条件で検索" onclick="searchButton(tempSearchData)"></input>
+		</div>
+
+	</div>
+
+
+	<div>
+		<input type="button" value="承認"></input>
+		<input type="button" value="再申要求" onclick="reapprovalRequest(requestList)"></input>
+	</div>
+
+	<!-- テーブル項目  -->
+	<table id = "approvalBaseTable">
+		<thead>
+			<tr>
+				<th rowspan="2"></th> <!-- チェックボックス用ダミーセル -->
+				<th rowspan="2">承認状態</th>
+				<th rowspan="2">組織名</th>
+				<th rowspan="2">業務名</th>
+				<th rowspan="2">氏名</th>
+				<th colspan="4">申請内容</th>
+				<th rowspan="2">備考</th>
+				<th rowspan="2"></th>
+			</tr>
+			<tr>
+				<th>対象日</th>
+				<th>勤務区分</th>
+				<th>開始</th>
+				<th>終了</th>
+			</tr>
+		</thead>
+		<tbody id="approvalList"></tbody>
+	</table>
+
+	<input type="button" value="承認"></input>
+	<input type="button" value="再申要求"></input>
+
+	<script type="text/javascript">
+
+	var approvalStatusList = ["申請中", "要訂正", "承認済み"];
+
+	approvalStatusInputSelect("approvalStatus", approvalStatusList);
+
+
+	var department = [["組織名1","業務名1","業務名2","業務名3"], ["組織名2","業務名4","業務名5","業務名6","業務名7","業務名8"]];
+
+	var departmentList = department;
+
+	departmentInputSelect("department", departmentList);
+
+	init();
+	function init(){
+		firstSelect();
+		initApprovalList();
+	}
+
+	startMonthInputSelect("startMonth");
+
+	var endMonthList = ["2016/11", "2016/12", "2017/1"]
+
+	endMonthInputSelect("endMonth", endMonthList);
+
+	//検索データ(仮)
+	//[承認状態(0～2),組織名,業務名,氏名,申請対象開始日,申請対象終了日]
+	var listStartNumber = 1; //リストの開始番号(表示件数に関わる)
+	var listEndNumber = 100; //リストの終了番号(表示件数に関わる)
+	var tempSearchData = ["0","組織A","業務A","山田太郎","2016/10","2016/12",listStartNumber,listEndNumber];
+	var requestList;	//承認リスト
+
+	</script>
+
+</body>
+</html>

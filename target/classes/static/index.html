@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" type="text/javascript"></script>
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet" />
+<script src="js/bootstrap.min.js"></script>
+<link href="css/base.css" rel="stylesheet" />
+<script src="js/webPageCreate.js"></script>
+<script src="js/base.js"></script>
+<script src="js/check.js"></script>
+<script src="js/message.js"></script>
+<script src="js/time.js"></script>
+
+
+</head>
+
+
+
+<body>
+	<header>
+		<div id="headerImage"></div>
+	</header>
+	<div id="DateArea"></div>
+	<div id="ClockArea"></div>
+	<div id="messageAria"></div>
+
+	<nav>
+		<div id="contents"></div>
+	</nav>
+
+
+	<article>
+		<div class="box1">
+			<div id="main_menu"></div>
+		</div>
+	</article>
+
+	<div class="box4">
+		<footer>
+			<div id="footerImage"></div>
+		</footer>
+	</div>
+
+	<form name="moveForm">
+		<input id="postData" type="hidden"></input>
+	</form>
+
+
+
+
+	<script type="text/javascript">
+
+		var companyCode    = "";
+		var userNumber     = "";
+		var userName       = "";
+
+		var gobalAuthority = "";
+		var beforePage     = "";
+		var currentPage    = ""
+		var globalValueList = [];
+
+		//25は権限コード
+		setButtonParam(25);
+		//alert(buttonList);
+
+		webPageCreate(buttonList);		//restController処理に置換予定
+		pageChange("1000S");
+
+
+		//禁止事項
+		//rightClickBan();
+		keyBan();
+
+
+
+
+
+
+		$("#menu li").hover(function() {
+		    $(this).children('ul').show();
+		}, function() {
+		    $(this).children('ul').hide();
+		});
+
+
+
+		function movePage(obj){
+			beforePage = currentPage;
+			pageChange(obj.name);
+		}
+
+
+	</script>
+</body>
+</html>

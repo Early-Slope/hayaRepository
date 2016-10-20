@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+	<p>confirmResult</p>
+	<p>Yukiのプロフィール</p>
+
+	<input type="text"  id="firstName"></input>
+	<input type="text"  id="num"></input>
+
+
+	<script>
+		getValue(globalList);
+
+		function getValue(globalList){
+			var len = globalList.length;
+			if(len==0){
+				alert("error");
+			}else if(len=="2"){
+				document.getElementById("firstName").value = globalList[0];
+				document.getElementById("num").value = globalList[1];
+			}else{
+				alert("error");
+			}
+			globalList = [];
+		}
+
+
+		function submitForm() {
+			var text = document.getElementById("firstName").value;
+			var num = document.getElementById("num").value;
+			globalList.push(text);
+			globalList.push(num);
+			$('#main_menu').load('/confirmResult', null, function(){});
+		}
+	</script>
+
+
+
+
+
+</body>
+</html>

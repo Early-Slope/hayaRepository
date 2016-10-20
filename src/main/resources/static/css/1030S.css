@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+.day{
+	text-decoration: none;
+	color:#000000;
+}
+
+.holiday1{
+	color:#ff0000;
+}
+.holiday2{
+	color:#0000ff;
+}
+
+.dateCell{
+	width:20px;
+	border:1px #000000 solid;
+}

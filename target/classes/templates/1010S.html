@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+
+
+
+<body>
+
+	<p>タイムカード打刻</p>
+	<div id="messageAria"></div>
+
+	<article>
+		<section>
+			<div>step1</div><div>今日の業務を選択する</div>
+			<select id="work"></select>
+
+
+		</section>
+
+		<section>
+			<div>step2</div><div>送信するコメントを入力</div>
+			<textarea id="inputText" placeholder="ここに入力" style="resize: none;"></textarea>
+
+		</section>
+
+
+
+		<section>
+			<div>step3</div><div>上記の内容で打刻する。</div>
+
+		<input type="button" value="出勤する"  id="b1" onclick="modalCheck(this)"></input>
+		<input type="button" value="退勤する" id="b2" onclick="modalCheck(this)"></input>
+
+
+		</section>
+		<input type="button" value="戻る"  id="pageBack" onclick="submitForm(this)"></input>
+
+		<section>
+
+		</section>
+
+
+	</article>
+
+
+
+
+
+	<!-- modal -->
+
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<!--  button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button -->
+					<h4 class="modal-title">処理結果</h4>
+				</div>
+				<div class="modal-body">
+					<div id="modalMessageAria"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+					<button type="button" class="btn btn-primary" id="confirmation" onclick="modalPageChange()">確認</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ここまで -->
+
+
+
+
+
+
+
+
+	<script type="text/javascript">
+		messageInit();
+		currentPage = "1010S";
+		document.getElementById("contents").hidden = true;
+
+		var messageStr;
+		var valid;
+		//var work = ["1SOL","2SOL","3SOL","CLSG"];
+		var workList = work;
+
+
+		workInputSelect("work",workList);
+
+
+
+
+		function submitForm(obj) {
+			switch(obj.id){
+				case "b1":
+					alert(obj.value);
+					break;
+				case "b2":
+					alert(obj.value);
+					break;
+				case "pageBack":
+					pageChange("1000S");
+					break;
+			}
+		}
+
+
+
+		function getMessage() {
+
+		}
+
+
+		function modalCheck(obj) {
+			getMessage();
+			//var result  = createMessage(message)[0];
+			//var resultMessage = createMessage(mesage)[1];
+			//var result  = "true";
+			var result  = "false";
+			//var resultMessage = "成功";
+			var resultMessage = "失敗";
+
+			var len = document.getElementById("work").value.length;
+
+			if(obj.id == "b1") {
+				alert("出勤");
+				if(len != "0") {
+					modalWindow(result,resultMessage);
+				} else {
+					document.getElementById("messageAria").innerHTML = E000001;
+				}
+			} else if(obj.id == "b2") {
+				alert("退勤");
+				if(len != "0") {
+					modalWindow(result,resultMessage);
+				} else {
+					document.getElementById("messageAria").innerHTML = E000001;
+				}
+			}
+
+		}
+
+		function modalWindow(result,resultMessage){
+			jQuery('.modal').modal('show');
+			document.getElementById("modalMessageAria").innerHTML = resultMessage;
+			document.getElementById("confirmation").disabled = "";
+			document.getElementById("confirmation").style.background='#0000DD';
+
+			if(result=="false"){
+				document.getElementById("confirmation").disabled = "true";
+				document.getElementById("confirmation").style.background='#DDDDDD';
+			}
+		};
+
+		function modalPageChange(){
+			jQuery('.modal').modal('hide');
+			beforePage = "1010S";
+			pageChange("1000S");
+		}
+
+
+
+
+
+
+
+
+
+	</script>
+
+</body>
+</html>

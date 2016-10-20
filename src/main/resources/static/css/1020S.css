@@ -1,0 +1,130 @@
+@CHARSET "UTF-8";
+
+#planningTime{
+	background-color:transparent;
+	border:1px dotted;
+}
+
+
+#divSpace{
+	background-color:transparent;
+}
+
+
+#baseTable{
+	color: #000000;
+}
+
+
+.cell0{
+	width:3%;
+}
+.cell1{
+	width:8%;
+}
+.cell2{
+	width:5%;
+}
+.cell3{
+	width:8%;
+}
+.cell4{
+	width:8%;
+}
+.cell5{
+	width:15%;
+}
+.cell6{
+	width:5%;
+}
+.cell7{
+	width:28%;
+}
+.cell8{
+	width:6%;
+}
+.cell9{
+	width:10%;
+}
+.cell10{
+	width:4%;
+}
+
+.holiday1{
+	color:#ff0000;
+}
+.holiday2{
+	color:#0000ff;
+}
+.holiday3{
+	color:#00ff00;
+}
+
+
+
+
+.meter{
+	height:15px;
+	list-style:none;
+	text-align:right;
+}
+
+#graph0 {
+	background-color:blue;
+	float:left;
+
+}
+
+#overTime {
+	background-color:red;
+	float:left;
+}
+#space {
+	background-color:transparent;
+	float:left;
+}
+.actualValue{
+	position: absolute;
+	float:left;
+	margin-left:5px;
+}
+
+.actualValueNormalColor{
+	color:#ffffff;
+	list-style:none;
+}
+.actualValueOverColor{
+	color:#ff0000;
+	list-style:none;
+}
+
+
+
+
+#subMenu{
+	position: absolute;
+	width:150px;
+	height:40px;
+	list-style:none;
+}
+
+
+#subMenu li a {
+	list-style:none;
+	display: block;
+	width: 122px;
+	height: 30px;
+	color: #fff;
+	font-size: 14px;
+	line-height: 2.8;
+	padding-left: 10px;
+	background: #aaaaaa;
+	text-decoration: none;
+}
+
+#subMenu li a:hover {
+	color: #fff;
+	background: #cccccc;
+}
+
+
